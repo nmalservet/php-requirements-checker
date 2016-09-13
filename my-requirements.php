@@ -52,10 +52,10 @@ $libraries_required=[
  * error = if teh requirement is missing, print a red line
  */
 $folders_required=[
-    ["test","R", "warn"],
-    ["runtime","W", "warn"],
-    ["../php-requirements-checker","W", "warn"],
-    ["webapp","W", "warn"],
+    ["test","r", "warn"],
+    ["runtime","w", "warn"],
+    ["../php-requirements-checker","w", "warn"],
+    ["webapp","w", "warn"],
 ];
 
         /**
@@ -77,7 +77,7 @@ $folders_required=[
  */
 $files_required=[
     ["config.php","R", "error"],
-    ["README.md","W", "notice"],
+    ["README.md","R", "notice"],
 ];
 ?>
 

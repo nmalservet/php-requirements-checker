@@ -22,59 +22,56 @@
                 $status = "ko";
                 $message = "library not loaded";
                 //if name = PHP_VERSION
-                if($name=="PHP_VERSION"){
+                if ($name == "PHP_VERSION") {
                     $cversion = phpversion();
-                    $comp= version_compare ($version ,$cversion);
-                    if($comp==-1){
+                    $comp = version_compare($version, $cversion);
+                    if ($comp == -1) {
                         //case expected version < current version
-                        $status="ok";
-                        $message = "PHP version ".$version." expected, version ".$cversion." founded";
+                        $status = "ok";
+                        $message = "PHP version " . $version . " expected, version " . $cversion . " founded";
                     }
-                    if($comp==0){
-                        $message = "PHP version ".$version." expected is founded";
-                        $status="ok";
+                    if ($comp == 0) {
+                        $message = "PHP version " . $version . " expected is founded";
+                        $status = "ok";
                     }
-                    if($comp==1){
-                        $message = "PHP version ".$version." expected, version ".$cversion." founded";
-                        $status="ko";
+                    if ($comp == 1) {
+                        $message = "PHP version " . $version . " expected, version " . $cversion . " founded";
+                        $status = "ko";
                     }
-                        
-                }else
+                } else
                 if (extension_loaded($name)) {
                     $status = "ok";
                     $message = "library loaded";
                     //get version
                     $cversion = phpversion($name);
-                    if($version==$cversion){
+                    if ($version == $cversion) {
                         $message.=", equal version ";
-                    }else{
-                        $comp= version_compare ($version ,$cversion);
-                        $message.=", version ".$version." expected , version ".$cversion." founded";
-                        if($comp==-1){
+                    } else {
+                        $comp = version_compare($version, $cversion);
+                        $message.=", version " . $version . " expected , version " . $cversion . " founded";
+                        if ($comp == -1) {
                             //case expected version < current version
-                            if($compatMode=="asc"){
+                            if ($compatMode == "asc") {
                                 $status = "ko";
                             }
-                            if($compatMode=="desc"){
+                            if ($compatMode == "desc") {
                                 $status = "ok";
                             }
                         }
-                        if($comp==0){
+                        if ($comp == 0) {
                             //cas version == cversion
                             $message.=", equal version ";
                         }
-                        if($comp==1){
+                        if ($comp == 1) {
                             //case expected version > current version
-                            if($compatMode=="asc"){
+                            if ($compatMode == "asc") {
                                 $status = "ok";
                             }
-                            if($compatMode=="desc"){
+                            if ($compatMode == "desc") {
                                 $status = "ko";
                             }
                         }
                     }
-                    
-                    
                 }
                 //check if the version is correct
                 $dependency = $name . " " . $version;
@@ -104,6 +101,15 @@
                 if (is_dir($name)) {
                     $message = "folder exist";
                     $status = "ok";
+                    //check rights
+                    if ($access == "w") {
+                        if (is_writable($name)) {
+                            $message.=", folder writable";
+                        } else {
+                            $status = "ko";
+                            $message.=", folder not writable";
+                        }
+                    }
                 }
                 $result[] = ["FOLDER", $name, $status, $message, $level];
             }
@@ -129,6 +135,22 @@
                 if (is_file($name)) {
                     $message = "file exist";
                     $status = "ok";
+                    if ($access == "w") {
+                        if (is_writable($name)) {
+                            $message.=", file writable";
+                        } else {
+                            $status = "ko";
+                            $message.=", file not writable";
+                        }
+                    }
+                    if ($access == "r") {
+                        if (is_readable($name)) {
+                            $message.=", file readable";
+                        } else {
+                            $status = "ko";
+                            $message.=", file not readable";
+                        }
+                    }
                 }
                 $result[] = ["FILE", $name, $status, $message, $level];
             }
