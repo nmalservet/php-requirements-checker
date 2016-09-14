@@ -32,10 +32,13 @@ To add this library to your installation via composer, you only need to add "nma
 Then, run the command "composer update".
 Composer will install the library into your "vendor" folder probably.
 
-You need to create your own configuration and call the script from your installation. First copy the file my-requirements.php into your folder, for example "my-own-requirements.php".
- Open a file, for example my-checker.php then include the configuration file and the script
+You need to create your own configuration and call the script from your installation.
+ First copy the file my-requirements.php into your folder, for example "my-own-requirements.php".
+Open a file, for example my-checker.php then include the configuration file and the script.
+```PHP
 include ('my-own-requirements.php');
 require(__DIR__ . '/../vendor/nmalservet/php-requirements-checker/php-requirements-checker.php');
+```
 
 So to check if your requirements are installed, you need to use this url:
 http://localhost/myapp/my-checker.php
