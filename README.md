@@ -24,7 +24,7 @@ Composer is a powerfull tool o install external libraries. If you need to know h
 
 
 To add this library to your installation via composer, you only need to add "nmalservet/php-requirements-checker" to your "require" section into your composer.json as example below :
-```Javascript
+```javascript
 "require": {
         "nmalservet/php-requirements-checker":"*",
         ...
