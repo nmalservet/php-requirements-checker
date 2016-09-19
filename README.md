@@ -44,3 +44,17 @@ require(__DIR__ . '/../vendor/nmalservet/php-requirements-checker/php-requiremen
 
 So to check if your requirements are installed, you need to use this url:
 http://localhost/myapp/my-checker.php
+
+
+#Optional section : protect your script to check requirements with a restricted access
+To protect your script, create an .htaccess file into the directory of your "my-checker.php".
+Then copy the following lines :
+```<FilesMatch "my-checker.php">
+AuthName "Admin Only"
+AuthType Basic
+AuthUserFile /var/www/.passwd
+require valid-user
+</FilesMatch> ```
+
+You will need to create a file .passwd into /var/www.
+To do it use toe command line tool htpasswd : https://httpd.apache.org/docs/current/programs/htpasswd.html
